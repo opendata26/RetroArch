@@ -110,6 +110,9 @@ endif
    #	DEFINES += -DHAVE_FREETYPE
    	DEFINES += -DHAVE_XMB -DHAVE_MATERIALUI
    else
+   
+     	ZLIB_LIBS = -lz
+   
    	HAVE_MENU_COMMON = 1
    	HAVE_RTGA = 1
    	HAVE_RPNG = 1
@@ -118,7 +121,6 @@ endif
    	HAVE_RGUI = 1
    	HAVE_ZLIB = 1
    	HAVE_7ZIP = 1
-   	HAVE_BUILTINZLIB = 1
    	HAVE_LIBRETRODB = 1
    	HAVE_ZARCH = 0
    	HAVE_MATERIALUI = 1
