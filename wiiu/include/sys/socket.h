@@ -2,6 +2,7 @@
 #include <wiiu/types.h>
 #include <stdint.h>
 #include <sys/time.h>
+#include <netinet/in.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,14 +21,26 @@ extern "C" {
 #define MSG_DONTWAIT    0x0020
 /* #define MSG_DONTWAIT    0x0004 */
 
+#define SO_DONTROUTE	5
+#define SO_LINGER	13
+#define SO_BROADCAST	6
+#define SO_KEEPALIVE	9
 #define SO_REUSEADDR    0x0004
 #define SO_NBIO         0x1014
 
+
+#define IP_MULTICAST_LOOP 		34
+#define IP_ADD_MEMBERSHIP		35
+#define IP_DROP_MEMBERSHIP		36
 
 /* return codes */
 #define SO_SUCCESS      0
 #define SO_EWOULDBLOCK  6
 
+struct ip_mreq  {
+        struct in_addr imr_multiaddr;   /* IP multicast address of group */
+        struct in_addr imr_interface;   /* local IP address of interface */
+};
 
 typedef uint32_t socklen_t;
 typedef uint16_t sa_family_t;
@@ -49,6 +62,16 @@ struct linger
    int l_onoff;
    int l_linger;
 };
+
+struct hostent {
+   char *h_name;       /* official name of host */
+   char **h_aliases;   /* alias list */
+   int h_addrtype;     /* host address type */
+   int h_length;       /* length of address */
+   char **h_addr_list; /* list of addresses */
+};
+
+#define h_addr h_addr_list[0] /* for backward compatibility */
 
 void socket_lib_init();
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);

@@ -232,7 +232,7 @@ CXXFLAGS = $(CFLAGS) -fno-rtti -fno-exceptions
 
 LDFLAGS  += -Wl,--gc-sections
 
-LIBS	:= $(WHOLE_START) -lretro_wiiu $(WHOLE_END) -lm
+LIBS	:= $(WHOLE_START) -lretro_wiiu -lbzip2 -lbson $(WHOLE_END) -lm
 
 ifneq ($(WANT_LIBFAT), 1)
 LIBS += -lfat
